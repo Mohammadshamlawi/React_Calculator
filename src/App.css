@@ -1,38 +1,62 @@
 .App {
-  text-align: center;
+  @apply text-center;
 }
-
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  @apply h-[40vmin] pointer-events-none motion-safe:animate-[App-logo-spin_infinite_20s_linear];
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  @apply bg-[#282c34] min-h-screen flex flex-col items-center justify-center text-[calc(10px_+_2vmin)] text-[white];
 }
-
 .App-link {
-  color: #61dafb;
+  @apply text-[#61dafb];
 }
-
 @keyframes App-logo-spin {
   from {
-    transform: rotate(0deg);
+    @apply rotate-0;
   }
   to {
-    transform: rotate(360deg);
+    @apply rotate-[360deg];
   }
+}
+.calculator {
+  @apply shadow-[0px_3px_6px_0px_rgba(0,0,0,0.15),0px_2px_4px_0px_rgba(0,0,0,0.12)] overflow-hidden text-[hsl(202,11%,29%)] rounded-[10px];
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  margin-block-start: 2em;
+  max-inline-size: 22rem;
+}
+.calculator__output {
+  @apply text-white text-5xl text-start min-h-[110px] overflow-x-auto;
+  background: hsl(202, 11%, 29%);
+  padding-block-start: 0.5rem;
+  padding-block-end: 0.5rem;
+  padding-inline-end: 0.75rem;
+  padding-inline-start: 0.75rem;
+}
+.calculator__keys {
+  @apply grid grid-cols-[repeat(4,1fr)] gap-px m-auto p-2;
+  /* Add some whitespace around the keys */
+}
+.calculator__key {
+  @apply text-2xl m-1 rounded-[40px] border-[none] active:shadow-[0_0_8px_0_rgba(0,0,0,0.3)_inset];
+  background: hsl(210, 25%, 95%);
+  padding-block-start: 1rem;
+  padding-block-end: 1rem;
+  padding-inline-end: 1.25rem;
+  padding-inline-start: 1.25rem;
+  inline-size: 70px;
+  block-size: 70px;
+}
+.calculator__key:active {
+  outline: none;
+}
+.calculator__key--operator {
+  background: hsl(208, 25%, 86%);
+}
+.calculator__key--operator:active {
+  background: hsl(208, 24%, 80%);
+}
+.calculator__key--enter {
+  @apply col-[4_/_5] row-[2_/_span_4] h-auto;
+  background: hsl(357, 100%, 72%);
 }
