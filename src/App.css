@@ -57,3 +57,8 @@
 .center_calc {
     @apply flex items-center justify-center;
 }
+
+.copy_btn {
+    @apply absolute float-right text-white cursor-pointer text-sm rounded-xl transform-none px-2 py-1.5 
+    bg-[#696fb0] hover:bg-[#40499b] transition-colors duration-200 right-20 top-24 font-bold;
+}

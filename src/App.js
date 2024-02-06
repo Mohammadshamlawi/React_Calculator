@@ -34,7 +34,9 @@ function App() {
 
     function handleButtonClick(num) {
         let val = "0";
-        if (num === "back") {
+        if (num === "undefined") {
+            val = "undefined";
+        } else if (num === "back") {
             if (value !== "undefined" && value !== "0" && value.length > 0)
                 val = value.substring(0, value.length - 1);
         } else if (
@@ -92,10 +94,41 @@ function App() {
         updateValue("0");
     }
 
+    function copyToClipboard() {
+        navigator.clipboard.writeText(value);
+    }
+
+    function pasteFromClipboard() {
+        try {
+            let val;
+            navigator.clipboard
+                .readText()
+                .then(
+                    (text) => (
+                        (val = eval(text)),
+                        handleButtonClick(
+                            isNaN(Number(val)) ? "undefined" : val
+                        )
+                    )
+                );
+        } catch (error) {
+            handleButtonClick("undefined");
+        }
+    }
+
     return (
-        <div className="App" onKeyUp={handleKeyEvent}>
+        <div
+            className="App"
+            onKeyUp={handleKeyEvent}
+            onPaste={pasteFromClipboard}
+        >
             <header className="App-header">
-                <div className="output">{value}</div>
+                <div className="output">
+                    <button className="copy_btn" onClick={copyToClipboard}>
+                        Copy
+                    </button>
+                    {value}
+                </div>
                 <div className="calculator">
                     <div className="center_calc">
                         <div className="calculator__keys">
