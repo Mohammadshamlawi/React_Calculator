@@ -30,6 +30,7 @@ function OperatorButton({ operation, onClick }) {
 function App() {
     const [value, updateValue] = useState("");
     const operations = ["+", "-", "\u00d7", "÷", "%", "."];
+    const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
     function handleButtonClick(num) {
         let val = "0";
@@ -46,6 +47,25 @@ function App() {
         }
 
         updateValue(val);
+    }
+
+    function handleKeyEvent(event) {
+        if (event.key === "=") {
+            printResult();
+        } else if (event.key === "Backspace") {
+            handleButtonClick("back");
+        } else if (event.key === "C" || event.key === "c") {
+            clear();
+        } else if (event.key === "*") {
+            handleButtonClick(operations[2]);
+        } else if (event.key === "/") {
+            handleButtonClick(operations[3]);
+        } else if (
+            numbers.includes(event.key) ||
+            operations.includes(event.key)
+        ) {
+            handleButtonClick(event.key);
+        }
     }
 
     function printResult() {
@@ -73,7 +93,7 @@ function App() {
     }
 
     return (
-        <div className="App">
+        <div className="App" onKeyUp={handleKeyEvent}>
             <header className="App-header">
                 <div className="output">{value}</div>
                 <div className="calculator">
